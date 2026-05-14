@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Event Manager Demo</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Event navigation">
+        <div class="brand">
+          <div class="brand-mark">EM</div>
+          <div>
+            <p class="eyebrow">Charleston hospitality</p>
+            <h1>AI Event Manager</h1>
+          </div>
+        </div>
+
+        <section class="sidebar-section">
+          <p class="section-label">Active event</p>
+          <button class="event-card is-active" type="button" data-event="rehearsal">
+            <span>Rehearsal Dinner</span>
+            <strong>Tonight, 6:30 PM</strong>
+            <small>Harbor Room - 84 guests</small>
+          </button>
+          <button class="event-card" type="button" data-event="corporate">
+            <span>Corporate Reception</span>
+            <strong>Tomorrow, 5:00 PM</strong>
+            <small>Rooftop - 46 guests</small>
+          </button>
+          <button class="event-card" type="button" data-event="brunch">
+            <span>Farewell Brunch</span>
+            <strong>Sunday, 11:00 AM</strong>
+            <small>Garden Room - 62 guests</small>
+          </button>
+        </section>
+
+        <section class="sidebar-section">
+          <p class="section-label">Ownership map</p>
+          <div class="owner-list">
+            <div><span>Guests</span><strong id="guestCount">84</strong></div>
+            <div><span>Vendors</span><strong id="vendorCount">5</strong></div>
+            <div><span>Staff teams</span><strong id="teamCount">4</strong></div>
+          </div>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Live command center</p>
+            <h2 id="eventTitle">Rehearsal Dinner - Harbor Room</h2>
+          </div>
+          <div class="status-strip" aria-label="Event health">
+            <div>
+              <span>AI confidence</span>
+              <strong id="confidence">96%</strong>
+            </div>
+            <div>
+              <span>Open risks</span>
+              <strong id="riskCount">2</strong>
+            </div>
+            <div>
+              <span>Next check</span>
+              <strong id="nextCheck">4:45 PM</strong>
+            </div>
+          </div>
+        </header>
+
+        <section class="scenario-bar" aria-label="Demo scenarios">
+          <button type="button" data-scenario="dietary">Guest dietary change</button>
+          <button type="button" data-scenario="vendor">Vendor timing issue</button>
+          <button type="button" data-scenario="arrival">Arrival logistics update</button>
+          <button type="button" data-scenario="lastMinute">Last-minute room change</button>
+          <button class="quiet" type="button" id="resetDemo">Reset</button>
+        </section>
+
+        <div class="dashboard-grid">
+          <section class="panel command-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-label">AI triage</p>
+                <h3>Incoming updates</h3>
+              </div>
+              <span class="pill" id="triageState">Monitoring</span>
+            </div>
+
+            <div class="message-feed" id="messageFeed" aria-live="polite"></div>
+
+            <form class="composer" id="updateForm">
+              <label for="incomingMessage">Add an event update</label>
+              <div class="composer-row">
+                <input id="incomingMessage" name="incomingMessage" type="text" autocomplete="off" placeholder="Example: florist is running 15 minutes late">
+                <button type="submit">Process</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="panel plan-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-label">Plan integrity</p>
+                <h3>Run of show</h3>
+              </div>
+              <span class="pill good">On track</span>
+            </div>
+
+            <ol class="timeline" id="timeline">
+              <li class="done"><span>3:45 PM</span><strong>Banquet team confirms room reset</strong></li>
+              <li class="active"><span>4:30 PM</span><strong>Vendors arrive for setup</strong></li>
+              <li><span>5:15 PM</span><strong>Kitchen final count lock</strong></li>
+              <li><span>6:00 PM</span><strong>Guest arrival window opens</strong></li>
+              <li><span>6:30 PM</span><strong>Dinner service begins</strong></li>
+            </ol>
+          </section>
+
+          <section class="panel alignment-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-label">Affected teams</p>
+                <h3>Alignment board</h3>
+              </div>
+              <span class="pill" id="alignmentScore">4/4 current</span>
+            </div>
+
+            <div class="team-grid" id="teamGrid"></div>
+          </section>
+
+          <section class="panel visual-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-label">Floor plan</p>
+                <h3>Harbor Room setup</h3>
+              </div>
+              <span class="pill">84 seats</span>
+            </div>
+            <div class="floor-plan" aria-label="Simplified event floor plan">
+              <div class="stage">Toast + AV</div>
+              <div class="tables">
+                <span>T1</span><span>T2</span><span>T3</span><span>T4</span>
+                <span>T5</span><span>T6</span><span>T7</span><span>T8</span>
+              </div>
+              <div class="service">Kitchen pass</div>
+              <div class="entry">Guest entry</div>
+            </div>
+          </section>
+
+          <section class="panel action-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="section-label">Confirmed actions</p>
+                <h3>What the AI owns</h3>
+              </div>
+              <span class="pill" id="actionCount">6 actions</span>
+            </div>
+            <div class="action-list" id="actionList"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
